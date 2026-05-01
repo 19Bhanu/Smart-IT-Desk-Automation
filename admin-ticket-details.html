@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ticket Details</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>SIDAS Admin</h2>
+        <a href="/admin/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Header -->
+        <div class="header">
+            <h3>Ticket Details</h3>
+            <a href="/admin/dashboard" class="action-btn" style="background:#ef4444; font-weight:500;">Back</a>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+
+            <!-- TITLE -->
+            <h2 style="margin-bottom:20px;" th:text="${ticket.title}"></h2>
+
+            <!-- INFO CARDS -->
+            <div class="cards">
+
+                <div class="card">
+                    <p>User Name</p>
+                    <h3 th:text="${ticket.user.name}"></h3>
+                </div>
+
+                <div class="card">
+                    <p>Email</p>
+                    <h3 th:text="${ticket.user.email}"></h3>
+                </div>
+
+                <div class="card">
+                    <p>Status</p>
+                    <h3 th:text="${ticket.status}"
+                        th:classappend="
+                        ${ticket.status == 'OPEN'} ? 'status-open' :
+                        (${ticket.status == 'IN_PROGRESS'} ? 'status-progress' :
+                        'status-resolved')">
+                    </h3>
+                </div>
+
+                <div class="card">
+                    <p>Priority</p>
+                    <h3 th:text="${ticket.priority}"></h3>
+                </div>
+
+            </div>
+
+            <!-- UPDATE STATUS (NEW) -->
+            <div class="card" style="margin-top:20px;">
+                <h3>Update Status</h3>
+
+                <form th:action="@{'/admin/update-status/' + ${ticket.id}}" method="post">
+                    <select name="status">
+                        <option th:selected="${ticket.status == 'OPEN'}">OPEN</option>
+                        <option th:selected="${ticket.status == 'IN_PROGRESS'}">IN_PROGRESS</option>
+                        <option th:selected="${ticket.status == 'RESOLVED'}">RESOLVED</option>
+                    </select>
+
+                    <button class="action-btn" style="margin-left:10px;">Update</button>
+                </form>
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="card" style="margin-top:20px;">
+                <h3>Description</h3>
+                <p class="ticket-desc" th:text="${ticket.description}"></p>
+            </div>
+
+            <div class="card" style="margin-top:20px;">
+                <h3>Admin Reply</h3>
+
+                <!-- EXISTING COMMENT -->
+                <p th:if="${ticket.adminComment != null}"
+                th:text="${ticket.adminComment}">
+                </p>
+
+                <!-- ADD COMMENT -->
+                <form th:action="@{'/admin/add-comment/' + ${ticket.id}}" method="post">
+                    <textarea name="comment" rows="4"
+                            placeholder="Write your reply..."
+                            style="width:100%; padding:10px;"></textarea>
+
+                    <button class="action-btn" style="margin-top:10px;">
+                        Submit
+                    </button>
+                </form>
+            </div>
+
+            <!-- IMAGES -->
+            <div class="card" style="margin-top:20px;">
+                <h3>Attachments</h3>
+
+                <!-- IF IMAGES -->
+                <div th:if="${ticket.images != null and !ticket.images.isEmpty()}">
+
+    <a th:each="img : ${ticket.images}"
+       th:href="@{'/uploads/' + ${img.imagePath}}"
+       target="_blank">
+
+        <img th:src="@{'/uploads/' + ${img.imagePath}}"
+             class="preview-img">
+
+    </a>
+
+</div>
+                <!-- NO IMAGES -->
+                <div th:if="${ticket.images == null or ticket.images.isEmpty()}">
+                    <p style="color:#666;">No images uploaded</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

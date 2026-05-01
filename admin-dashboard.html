@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>SIDAS Admin</h2>
+
+        <a href="/admin/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Header -->
+        <div class="header">
+            <h3>Admin Dashboard</h3>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <form method="get" action="/admin/dashboard" style="margin-bottom:20px;">
+
+    <!-- STATUS FILTER -->
+
+    <!-- SORT -->
+    <form method="get" action="/admin/dashboard" 
+      style="margin-bottom:20px; display:flex; gap:10px; align-items:center;">
+
+    <label><b>Filter:</b></label>
+
+    <select name="status">
+        <option value="">All</option>
+        <option value="OPEN" th:selected="${selectedStatus == 'OPEN'}">OPEN</option>
+        <option value="IN_PROGRESS" th:selected="${selectedStatus == 'IN_PROGRESS'}">IN_PROGRESS</option>
+        <option value="RESOLVED" th:selected="${selectedStatus == 'RESOLVED'}">RESOLVED</option>
+    </select>
+
+    <label><b>Sort:</b></label>
+
+    <select name="sort">
+        <option value="newest" th:selected="${selectedSort == 'newest'}">Newest</option>
+        <option value="oldest" th:selected="${selectedSort == 'oldest'}">Oldest</option>
+    </select>
+
+    <button class="action-btn">Apply</button>
+
+</form>
+
+</form>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>User</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Details</th>
+                </tr>
+
+                <tr th:each="ticket : ${tickets}">
+                    
+                    <td th:text="${ticket.id}"></td>
+                    
+                    <td >
+                        <strong th:text="${ticket.title}"></strong>
+                    </td>
+
+                    <!-- USER NAME + EMAIL -->
+                    <td>
+                        <strong th:text="${ticket.user.name}"></strong><br>
+                        <small  th:text="${ticket.user.email}"></small>
+                    </td>
+
+                    <!-- STATUS WITH COLOR -->
+                    <td>
+                        <span th:text="${ticket.status}"
+                              th:classappend="
+                                ${ticket.status == 'OPEN'} ? 'status-open' :
+                                (${ticket.status == 'IN_PROGRESS'} ? 'status-progress' :
+                                'status-resolved')">
+                        </span>
+                    </td>
+
+                    <!-- UPDATE STATUS -->
+                    <td>
+                        <form th:action="@{'/admin/update-status/' + ${ticket.id}}" method="post">
+                            <select name="status">
+                                <option th:selected="${ticket.status == 'OPEN'}">OPEN</option>
+                                <option th:selected="${ticket.status == 'IN_PROGRESS'}">IN_PROGRESS</option>
+                                <option th:selected="${ticket.status == 'RESOLVED'}">RESOLVED</option>
+                            </select>
+                            <button class="action-btn ">Update</button>
+                        </form>
+                    </td>
+
+                    <!-- VIEW DETAILS -->
+                    <td>
+                       <a th:href="@{'/admin/ticket/' + ${ticket.id}}" class="action-btn">
+                            View
+                        </a>
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

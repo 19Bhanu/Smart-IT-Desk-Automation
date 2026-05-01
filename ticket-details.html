@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ticket Details</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>SIDAS</h2>
+
+        <a href="/dashboard">Dashboard</a>
+        <a href="/tickets/create">Create Ticket</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Header -->
+        <div class="header">
+            <h3>Ticket Details</h3>
+            <a href="/dashboard" class="action-btn" style="background:#ef4444; font-weight:500;">Back</a>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+
+            <!-- TITLE -->
+            <h2 style="margin-bottom:20px;" th:text="${ticket.title}"></h2>
+
+            <!-- INFO CARDS -->
+            <div class="cards">
+
+                <div class="card">
+                    <p>Status</p>
+                    <h3 th:text="${ticket.status}"
+                        th:classappend="
+                        ${ticket.status == 'OPEN'} ? 'status-open' :
+                        (${ticket.status == 'IN_PROGRESS'} ? 'status-progress' :
+                        'status-resolved')">
+                    </h3>
+                </div>
+
+                <div class="card">
+                    <p>Priority</p>
+                    <h3 th:text="${ticket.priority}"></h3>
+                </div>
+
+                <div class="card">
+                    <p>Created</p>
+                    <h3 th:text="${ticket.createdAt}"></h3>
+                </div>
+
+                <div class="card">
+                    <p>User</p>
+                    <h3 th:text="${ticket.user.email}"></h3>
+                </div>
+
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="card" style="margin-top:20px;">
+                <h3>Description</h3>
+                <p class="ticket-desc" th:text="${ticket.description}"></p>
+            </div>
+
+            <!-- ADMIN COMMENT -->
+            <div th:if="${ticket.adminComment != null}" 
+               class="card" 
+               style="margin-top:20px; border-left:5px solid #4f46e5; background:#eef2ff;">
+
+               <h3 style="color:#4f46e5;">Admin Reply</h3>
+
+               <p th:text="${ticket.adminComment}" 
+                  style="font-size:15px; font-weight:500; margin-top:10px;">
+               </p>
+
+            </div>
+
+            <!-- IMAGES -->
+            <div class="card" style="margin-top:20px;">
+                <h3>Attachments</h3>
+
+                <!-- IF IMAGES -->
+                <div th:if="${ticket.images != null and !ticket.images.isEmpty()}">
+                    <a th:each="img : ${ticket.images}"
+                       th:href="@{'/uploads/' + ${img.imagePath}}"
+                       target="_blank">
+
+                        <img th:src="@{'/uploads/' + ${img.imagePath}}"
+                             class="preview-img">
+                    </a>
+                </div>
+
+                <!-- NO IMAGES -->
+                <div th:if="${ticket.images == null or ticket.images.isEmpty()}">
+                    <p style="color:#666;">No images uploaded</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

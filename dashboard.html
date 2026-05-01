@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>SIDAS Dashboard</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>SIDAS</h2>
+
+<a href="/dashboard">Dashboard</a>
+<a href="/tickets/create">Create Ticket</a>
+<a href="/logout">Logout</a>
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+<div class="header">
+<h3>Dashboard</h3>
+</div>
+
+<div class="content">
+
+
+<!-- STAT CARDS -->
+
+<div class="cards">
+
+<div class="card">
+<h3 th:text="${totalTickets}">0</h3>
+<p>Total Tickets</p>
+</div>
+
+<div class="card">
+<h3 th:text="${openTickets}">0</h3>
+<p>Open</p>
+</div>
+
+<div class="card">
+<h3 th:text="${progressTickets}">0</h3>
+<p>In Progress</p>
+</div>
+
+<div class="card">
+<h3 th:text="${resolvedTickets}">0</h3>
+<p>Resolved</p>
+</div>
+
+</div>
+
+
+<!-- TICKET GRID -->
+
+<h3>My Tickets</h3>
+
+<div class="ticket-grid">
+
+<div class="ticket-card" th:each="ticket : ${tickets}">
+
+<h3 th:text="${ticket.title}"></h3>
+
+<p class="ticket-desc"
+   th:text="${#strings.abbreviate(ticket.description,100)}">
+</p>
+
+<div class="ticket-meta">
+
+<span class="priority"
+      th:text="${ticket.priority}">
+</span>
+
+<span th:switch="${ticket.status}">
+
+<span th:case="'OPEN'" class="status-open">OPEN</span>
+<span th:case="'IN_PROGRESS'" class="status-progress">IN PROGRESS</span>
+<span th:case="'RESOLVED'" class="status-resolved">RESOLVED</span>
+<span th:case="'CLOSED'" class="status-closed">CLOSED</span>
+
+</span>
+
+</div>
+
+<a th:href="@{/tickets/{id}(id=${ticket.id})}">
+<button class="btn">View Ticket</button>
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

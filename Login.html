@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Login - SIDAS</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="auth-container">
+
+<h2>SIDAS Login</h2>
+
+<form th:action="@{/login}" method="post">
+
+<div class="input-group">
+<label>Email</label>
+<input type="email" name="username" placeholder="Enter email" required>
+</div>
+
+<div class="input-group">
+<label>Password</label>
+<input type="password" name="password" placeholder="Enter password" required>
+</div>
+
+<button class="btn" type="submit">Login</button>
+
+</form>
+
+<div class="link">
+<p>Don't have an account?
+<a th:href="@{/register}">Register</a>
+</p>
+</div>
+
+</div>
+
+</body>
+</html>

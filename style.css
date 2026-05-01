@@ -1,0 +1,484 @@
+/* =========================
+GLOBAL RESET
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, Arial, sans-serif;
+}
+
+body{
+background:#f4f6f9;
+color:#333;
+}
+
+/* =========================
+AUTH PAGES (LOGIN / REGISTER)
+========================= */
+
+.auth-container{
+width:380px;
+margin:120px auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 6px 18px rgba(0,0,0,0.1);
+}
+
+.auth-container h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+/* INPUT GROUP */
+
+.input-group{
+margin-bottom:15px;
+}
+
+.input-group label{
+display:block;
+margin-bottom:6px;
+font-weight:500;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select{
+width:100%;
+padding:10px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:14px;
+}
+
+/* BUTTON */
+
+.btn{
+width:100%;
+padding:10px;
+background:#4f46e5;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-size:15px;
+}
+
+.btn:hover{
+background:#4338ca;
+}
+
+/* LINK */
+
+.link{
+text-align:center;
+margin-top:12px;
+}
+
+.link a{
+text-decoration:none;
+color:#4f46e5;
+font-weight:500;
+}
+
+/* ERROR */
+
+.error{
+color:red;
+text-align:center;
+margin-bottom:10px;
+}
+
+/* =========================
+DASHBOARD LAYOUT
+========================= */
+
+.layout{
+display:flex;
+height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:230px;
+background:#1e293b;
+color:white;
+padding:20px;
+}
+
+.sidebar h2{
+margin-bottom:30px;
+font-size:22px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:10px;
+margin-bottom:10px;
+border-radius:6px;
+transition:0.2s;
+}
+
+.sidebar a:hover{
+background:#334155;
+}
+
+/* MAIN */
+
+.main{
+flex:1;
+display:flex;
+flex-direction:column;
+}
+
+/* HEADER */
+
+.header{
+background:white;
+padding:15px 25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #ddd;
+}
+
+.header h3{
+font-weight:500;
+}
+
+/* CONTENT */
+
+.content{
+padding:25px;
+}
+
+/* =========================
+STAT CARDS
+========================= */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+.card h3{
+font-size:26px;
+margin-bottom:5px;
+}
+
+.card p{
+color:#666;
+font-size:14px;
+}
+
+/* =========================
+TICKET GRID
+========================= */
+
+.ticket-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+/* TICKET CARD */
+
+.ticket-card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+transition:0.2s;
+}
+
+.ticket-card:hover{
+transform:translateY(-5px);
+}
+
+.ticket-card h4{
+margin-bottom:10px;
+font-size:18px;
+}
+
+/* =========================
+TABLE DESIGN
+========================= */
+
+table{
+width:100%;
+background:white;
+border-radius:10px;
+overflow:hidden;
+border-collapse:collapse;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+th{
+background:#4f46e5;
+color:white;
+padding:12px;
+text-align:left;
+font-size:14px;
+}
+
+td{
+padding:12px;
+border-bottom:1px solid #eee;
+font-size:14px;
+}
+
+tr:hover{
+background:#f8fafc;
+}
+
+/* =========================
+STATUS COLORS
+========================= */
+
+.status-open{
+color:#f59e0b;
+font-weight:bold;
+}
+
+.status-progress{
+color:#3b82f6;
+font-weight:bold;
+}
+
+.status-resolved{
+color:#10b981;
+font-weight:bold;
+}
+
+.status-closed{
+color:#ef4444;
+font-weight:bold;
+}
+
+/* =========================
+SMALL ACTION BUTTON
+========================= */
+
+.action-btn{
+padding:7px 12px;
+background:#4f46e5;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-size:13px;
+}
+
+.action-btn:hover{
+background:#4338ca;
+}
+
+/* =========================
+IMAGE DISPLAY
+========================= */
+
+.ticket-images img{
+width:200px;
+margin:10px;
+border-radius:6px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* =========================
+FILE INPUT
+========================= */
+
+.file-input{
+margin-top:10px;
+}
+
+/* =========================
+RESPONSIVE DESIGN
+========================= */
+
+@media (max-width:900px){
+
+.cards{
+grid-template-columns:repeat(2,1fr);
+}
+
+.sidebar{
+width:180px;
+}
+
+}
+
+@media (max-width:600px){
+
+.layout{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+display:flex;
+gap:10px;
+overflow-x:auto;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
+.ticket-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+/* ======================
+Ticket Cards
+====================== */
+
+.ticket-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.ticket-card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+transition:0.3s;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.ticket-card:hover{
+transform:translateY(-5px);
+}
+
+.ticket-card h3{
+margin-bottom:10px;
+font-size:18px;
+}
+
+.ticket-desc{
+color:#666;
+font-size:14px;
+margin-bottom:15px;
+}
+
+.ticket-meta{
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+}
+
+.priority{
+background:#eef2ff;
+padding:5px 10px;
+border-radius:6px;
+font-size:13px;
+}
+
+
+/* ======================
+Ticket Details
+====================== */
+
+
+    /* Centers the main ticket title */
+    .ticket-details h1 {
+        text-transform: uppercase;
+        color:#ef4444;
+        font-family:'Times New Roman', Times, serif;
+        text-align: center;
+        margin-right: 15cm;
+        margin-top: 20px;    /* Adds space before the title */
+        margin-bottom: 30px; /* Adds space after the title before info starts */
+    }
+
+    /* Optional: If you want the 'Ticket Details' header text centered too */
+    .header h3 {
+        text-align: center;
+    }
+
+
+.ticket-info{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-bottom:20px;
+}
+
+.ticket-description{
+background:#f8fafc;
+padding:15px;
+border-radius:8px;
+}
+
+
+/* ======================
+Image Preview
+====================== */
+
+.preview-img{
+width:150px;
+margin:10px;
+border-radius:6px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.preview-img:hover{
+transform:scale(1.05);
+}
+
+
+/* ======================
+Image Modal
+====================== */
+
+.modal{
+display:none;
+position:fixed;
+z-index:1000;
+padding-top:100px;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+}
+
+.modal-content{
+margin:auto;
+display:block;
+max-width:80%;
+border-radius:8px;
+}
+
+.close{
+position:absolute;
+top:40px;
+right:60px;
+color:white;
+font-size:40px;
+cursor:pointer;
+}
